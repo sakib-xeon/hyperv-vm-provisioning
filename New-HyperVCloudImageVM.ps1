@@ -72,7 +72,7 @@ param(
   [string] $CloudInitPowerState = "reboot", # poweroff, halt, or reboot , https://cloudinit.readthedocs.io/en/latest/reference/modules.html#power-state-change
   [string] $CustomUserDataYamlFile,
   [string] $GuestAdminUsername = "admin",
-  [string] $GuestAdminPassword = "Passw0rd",
+  [string] $GuestAdminPassword = "Xeon2024##VM",
   [string] $GuestAdminSshPubKey,
   [string] $ImageVersion = "20.04", # $ImageName ="focal" # 20.04 LTS , $ImageName="bionic" # 18.04 LTS
   [string] $ImageRelease = "release", # default option is get latest but could be fixed to some specific version for example "release-20210413"
@@ -198,6 +198,40 @@ Switch ($ImageVersion) {
     $ImageOS = "ubuntu"
     $ImageVersionName = "jammy"
     $ImageVersion = "22.04"
+    $ImageRelease = "release" # default option is get latest but could be fixed to some specific version for example "release-20210413"
+    $ImageBaseUrl = "http://cloud-images.ubuntu.com/releases" # alternative https://mirror.scaleuptech.com/ubuntu-cloud-images/releases
+    $ImageUrlRoot = "$ImageBaseUrl/$ImageVersionName/$ImageRelease/" # latest
+    $ImageFileName = "$ImageOS-$ImageVersion-server-cloudimg-amd64"
+    $ImageFileExtension = "img"
+    # Manifest file is used for version check based on last modified HTTP header
+    $ImageHashFileName = "SHA256SUMS"
+    $ImageManifestSuffix = "manifest"
+  }
+  "24.04" {
+    $_ = "noble"
+    $ImageVersion = "24.04"
+  }
+  "noble" {
+    $ImageOS = "ubuntu"
+    $ImageVersionName = "noble"
+    $ImageVersion = "24.04"
+    $ImageRelease = "release" # default option is get latest but could be fixed to some specific version for example "release-20210413"
+    $ImageBaseUrl = "http://cloud-images.ubuntu.com/releases" # alternative https://mirror.scaleuptech.com/ubuntu-cloud-images/releases
+    $ImageUrlRoot = "$ImageBaseUrl/$ImageVersionName/$ImageRelease/" # latest
+    $ImageFileName = "$ImageOS-$ImageVersion-server-cloudimg-amd64"
+    $ImageFileExtension = "img"
+    # Manifest file is used for version check based on last modified HTTP header
+    $ImageHashFileName = "SHA256SUMS"
+    $ImageManifestSuffix = "manifest"
+  }
+  "24.10" {
+    $_ = "oracular"
+    $ImageVersion = "24.10"
+  }
+  "oracular" {
+    $ImageOS = "ubuntu"
+    $ImageVersionName = "oracular"
+    $ImageVersion = "24.10"
     $ImageRelease = "release" # default option is get latest but could be fixed to some specific version for example "release-20210413"
     $ImageBaseUrl = "http://cloud-images.ubuntu.com/releases" # alternative https://mirror.scaleuptech.com/ubuntu-cloud-images/releases
     $ImageUrlRoot = "$ImageBaseUrl/$ImageVersionName/$ImageRelease/" # latest
